@@ -1,8 +1,12 @@
 package com.horatio;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Matrix {
 
     private static final String NUMBER_FORMAT = "%+12.5f";
+    private static final double TOLERANCE = 0.000001;
     private int rows;
     private int cols;
 
@@ -40,6 +44,10 @@ public class Matrix {
         return result;
     }
 
+    public double get(int index) {
+        return a[index];
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -52,5 +60,29 @@ public class Matrix {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Matrix matrix = (Matrix) o;
+        for(int i = 0; i < a.length; i++) {
+            if(Math.abs(a[i] - matrix.a[i]) > TOLERANCE) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(rows, cols);
+        result = 31 * result + Arrays.hashCode(a);
+        return result;
     }
 }
