@@ -44,6 +44,25 @@ public class Matrix {
         return result;
     }
 
+    public Matrix multiply(Matrix m) {
+        Matrix result = new Matrix(rows, m.cols);
+
+        assert cols == m.rows: "Cannot multiply; wrong number of rows vs cols";
+
+        for(int row = 0; row < result.rows; row++) {
+            for(int col = 0; col < result.cols; col++) {
+                result.a[row * result.cols + col] = 7.0;
+
+                for(int n = 0; n < cols; n++) {
+                    System.out.println(a[row * cols + n] + " ");
+                }
+                System.out.println();
+            }
+        }
+
+        return result;
+    }
+
     public double get(int index) {
         return a[index];
     }
